@@ -6,6 +6,8 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
 @Entity
@@ -20,15 +22,20 @@ public class Product implements Serializable {
 	private Integer amount;
 	private Double price;
 	
+	@ManyToOne
+	@JoinColumn(name = "categoryid")
+	private Category category;
+	
 	public Product() {
 	}
 
-	public Product(Long id, String name, Integer amount, Double price) {
+	public Product(Long id, String name, Integer amount, Double price, Category category) {
 		super();
 		this.id = id;
 		this.name = name;
 		this.amount = amount;
 		this.price = price;
+		this.category = category;
 	}
 
 	public Long getId() {
@@ -61,6 +68,14 @@ public class Product implements Serializable {
 
 	public void setPrice(Double price) {
 		this.price = price;
+	}
+
+	public Category getCategory() {
+		return category;
+	}
+
+	public void setCategory(Category category) {
+		this.category = category;
 	}
 
 	@Override
