@@ -23,9 +23,9 @@ public class ProductService {
 		Optional<Product> obj = repository.findById(id);
 		return obj;
 	}
-	
-	public Product create(Product Product) {
-		return repository.save(Product);
+
+	public Product save(Product product) {
+		return repository.save(product);
 	}
 	
 	public Product update(Product Product, Long id) {
@@ -36,4 +36,6 @@ public class ProductService {
 	public void delete(Long id) {
 		repository.deleteById(id);
 	}
+
+
 }

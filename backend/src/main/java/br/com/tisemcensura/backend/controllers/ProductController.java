@@ -2,6 +2,7 @@ package br.com.tisemcensura.backend.controllers;
 
 import java.net.URI;
 import java.util.List;
+import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
@@ -15,43 +16,43 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
-import br.com.tisemcensura.backend.entities.Category;
-import br.com.tisemcensura.backend.services.CategoryService;
+import br.com.tisemcensura.backend.entities.Product;
+import br.com.tisemcensura.backend.services.ProductService;
 
 @RestController
-@RequestMapping({"/categories"})
-public class CategoryController {
+@RequestMapping({"/products"})
+public class ProductController {
 	
 	@Autowired
-	private CategoryService service;
+	private ProductService service;
 	 
 	@GetMapping
-	public ResponseEntity<List<Category>> findAll(){
-		List<Category> list = service.findAll();
+	public ResponseEntity<List<Product>> findAll(){
+		List<Product> list = service.findAll();
 		return ResponseEntity.ok().body(list);
 	}
 	
 	@GetMapping(path = {"/{id}"})
 	public ResponseEntity<?> findById(@PathVariable Long id){
-		Category list = service.findById(id);
+		Optional<Product> list = service.findById(id);
 		return ResponseEntity.ok().body(list);
 	}
 	
 	@PostMapping
-	public ResponseEntity<Category> create(@RequestBody Category category){
-		category = service.save(category);
+	public ResponseEntity<Product> create(@RequestBody Product product){
+		product = service.save(product);
 		URI uri = ServletUriComponentsBuilder.fromCurrentRequest().path("/{id}")
-				.buildAndExpand(category.getId()).toUri();
-		return ResponseEntity.created(uri).body(category);
+				.buildAndExpand(product.getId()).toUri();
+		return ResponseEntity.created(uri).body(product);
 	}
 	
 	@RequestMapping(value = {"/{id}"}, method = RequestMethod.PUT)
-	public ResponseEntity<Category> update(@RequestBody Category category, @PathVariable Long id){
-		category = service.update(category, id);
+	public ResponseEntity<Product> update(@RequestBody Product product, @PathVariable Long id){
+		product = service.update(product, id);
 		return ResponseEntity.noContent().build();
 	}
 	
-	@DeleteMapping
+	@DeleteMapping(value = {"/{id}"})
 	public ResponseEntity<?> delete(@PathVariable Long id){
 		service.delete(id);
 		return ResponseEntity.noContent().build();
