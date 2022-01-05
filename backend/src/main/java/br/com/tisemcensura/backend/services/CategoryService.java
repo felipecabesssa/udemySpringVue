@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import br.com.tisemcensura.backend.entities.Category;
+import br.com.tisemcensura.backend.exceptions.ResourceNotFoundException;
 import br.com.tisemcensura.backend.repositories.CategoryRepository;
 
 @Service
@@ -21,7 +22,7 @@ public class CategoryService {
 	
 	public Category findById(Long id){
 		Optional<Category> obj = repository.findById(id);
-		return obj.get();
+		return obj.orElseThrow( () -> new ResourceNotFoundException(id) );
 	}
 	
 	public Category save(Category category) {
