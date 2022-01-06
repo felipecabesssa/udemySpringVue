@@ -5,6 +5,7 @@
       <router-link to="/about">About</router-link> -->
       <Menu/>
     </div>
+    <hr>
     <router-view/>
   </div>
 </template>
@@ -28,13 +29,15 @@ export default {
 
 #nav {
   padding: 30px;
-
   a {
     font-weight: bold;
     color: #2c3e50;
+    text-decoration: none;
+    font-size: 16px;
+    font-family: "Lucida Console", Courier, monospace;
 
     &.router-link-exact-active {
-      color: #42b983;
+      color: red;
     }
   }
 }
