@@ -1,0 +1,22 @@
+[
+    {
+        "id": 1,
+        "name": "Mac Book Pro",
+        "amount": 10,
+        "price": 6200.0,
+        "category": {
+            "id": 2,
+            "name": "Papelaria"
+        }
+    },
+    {
+        "id": 2,
+        "name": "Positivo",
+        "amount": 10,
+        "price": 100.0,
+        "category": {
+            "id": 2,
+            "name": "Papelaria"
+        }
+    }
+]
